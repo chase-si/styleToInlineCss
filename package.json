@@ -1,0 +1,14 @@
+{
+  "name": "jet_email_transform",
+  "version": "1.0.0",
+  "description": "transform css in style to inline css",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "chase",
+  "license": "ISC",
+  "dependencies": {
+    "node-html-parser": "^1.2.16"
+  }
+}
