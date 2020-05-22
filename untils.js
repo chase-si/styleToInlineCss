@@ -11,7 +11,7 @@ const addStyleToDom = (dom, style) => {
 }
 
 const handleCssContextToObject = cssString => {
-  let cssContext = replaceEmptySpace(cssString);
+  let cssContext = replaceFormatCharacter(cssString);
   let object = {};
   let indexStart = 0;
 
@@ -19,8 +19,15 @@ const handleCssContextToObject = cssString => {
     let firstRuleEnd = cssContext.indexOf('}') + 1;
     let firstRule = cssContext.substring(indexStart, firstRuleEnd);
 
-    const [firstRuleKey, firstRuleValue] = firstRule.split('{');
-    object[firstRuleKey] = firstRuleValue.slice(0, -1);
+    let [firstRuleKey, firstRuleValue] = firstRule.split('{');
+    firstRuleKey = firstRuleKey.trim();
+    firstRuleValue =
+      firstRuleValue
+        .split(';')
+        .map(item => item.trim())
+        .join(';')
+        .slice(0, -1);
+    object[firstRuleKey] = `${firstRuleValue.slice(0, -1)};`;
 
     cssContext = cssContext.substring(firstRuleEnd);
   }
@@ -30,6 +37,10 @@ const handleCssContextToObject = cssString => {
 
 const replaceEmptySpace = string => {
   return string.replace(/\s+/g, '');
+}
+
+const replaceFormatCharacter = string => {
+  return string.replace(/[\n\r\t]/g, '');
 }
 
 module.exports = {
