@@ -10,21 +10,38 @@ const writeFile = (path, jsonstring) => {
 	streamWrite.on('error', err => {
 		throw err
 	});
-	// streamWrite.on('finish',()=>{
-	//   cb();
-	// });
+	streamWrite.on('finish', () => {
+	  console.log(`write ${path} finished`);
+	});
 };
- 
-const inputText = fs.readFileSync('./input.html', 'utf-8'); 
-const inputTextDom = parse(inputText);
 
-const cssContext = fs.readFileSync('./style.css', 'utf-8'); 
-const cssObject = handleCssContextToObject(cssContext);
+const transfrom = fileName => {
+  const inputText = fs.readFileSync(`./input/${fileName}`, 'utf-8'); 
+  const inputTextDom = parse(inputText);
+  const cssContext = fs.readFileSync('./style.css', 'utf-8'); 
+  const cssObject = handleCssContextToObject(cssContext);
 
-for (let [key, value] of Object.entries(cssObject)) {
-  for (let dom of inputTextDom.querySelectorAll(key)) {
-    dom = addStyleToDom(dom, value);
-  };
-}
+  for (let [key, value] of Object.entries(cssObject)) {
+    for (let dom of inputTextDom.querySelectorAll(key)) {
+      dom = addStyleToDom(dom, value);
+    };
+  }
 
-writeFile('./output.html', inputTextDom.outerHTML);
+  writeFile(`./output/${fileName}`, inputTextDom.outerHTML);
+};
+
+fs.readdir('./input', (err, files) => {
+  if (err) {
+    console.log('read ./input error');
+    console.log(err);
+  }
+
+  if (files.length === 0) {
+    console.log('error: no file in ./input');
+  }
+
+  files.forEach((file) => {
+    transfrom(file);
+  });
+
+});

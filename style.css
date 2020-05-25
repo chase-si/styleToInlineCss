@@ -15,13 +15,17 @@
 
 .jetDev-textStyle {
   font-size: 16px;
-  line-height: 24px;
+  line-height: 23px;
+}
+
+.jetDev-textLinkColor {
+  color: #4B4C4D;
 }
 
 .jetDev-btnStyle {
   letter-spacing: 0.2px;
   display: block;
-  width: 233px;
+  width: 166px;
   height: 48px;
   color: #fff;
   font-size: 15px;
@@ -33,8 +37,16 @@
   text-decoration: none;
 }
 
+.jetDev-btnStyle-widther {
+  width: 233px;
+}
+
 .jetDev-mt45 {
-  margin-top: 45px;
+  margin-top: 40px;
+}
+
+.jetDev-mt36 {
+  margin-top: 36px;
 }
 
 .jetDev-m24 {

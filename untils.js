@@ -35,10 +35,6 @@ const handleCssContextToObject = cssString => {
   return object;
 }
 
-const replaceEmptySpace = string => {
-  return string.replace(/\s+/g, '');
-}
-
 const replaceFormatCharacter = string => {
   return string.replace(/[\n\r\t]/g, '');
 }
